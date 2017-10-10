@@ -40,12 +40,21 @@ public class FrontCompression {
         } else if (corpus.length() == 0) {
             return "";
         }
-
+        String res = "";
+        int lp;
+        String[] arr = corpus.split("\n");
+        res += "0 " + arr[0] + "\n";
+        for (int i = 1; i < arr.length; ++i) {
+            lp = longestPrefix(arr[i - 1], arr[i]);
+            res += lp + " " + arr[i].substring(lp) + "\n";
+            //System.out.println(res);
+        }
+        final int t = 100;
         /*
          * Complete this function.
          */
 
-        return "";
+        return res;
     }
 
     /**
@@ -63,12 +72,24 @@ public class FrontCompression {
         } else if (corpus.length() == 0) {
             return "";
         }
-
+        String[] arr = corpus.split("\n");
+        String[] inter = new String[arr.length];
+        String res;
+        inter[0] = arr[0].split(" ")[1];
+        int pref;
+        String suff;
+        for (int i = 1; i < arr.length; ++i) {
+            pref = Integer.parseInt(arr[i].split(" ")[0]);
+            suff = arr[i].split(" ")[1];
+            inter[i] = inter[i - 1].substring(0, pref) + suff;
+        }
+        res = String.join("\n", inter);
+        final int t = 100;
         /*
          * Complete this function.
          */
 
-        return "";
+        return res + "\n";
     }
 
     /**
@@ -79,10 +100,15 @@ public class FrontCompression {
      * @return the length of the common prefix between the two strings
      */
     private static int longestPrefix(final String firstString, final String secondString) {
-        /*
-         * Complete this function.
-         */
-        return 0;
+        int l = 0;
+        for (int i = 0; i < firstString.length() && i < secondString.length(); ++i) {
+            if (firstString.charAt(i) == secondString.charAt(i)) {
+                ++l;
+            } else {
+                break;
+            }
+        }
+        return l;
     }
 
     /**
