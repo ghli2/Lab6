@@ -49,11 +49,6 @@ public class FrontCompression {
             res += lp + " " + arr[i].substring(lp) + "\n";
             //System.out.println(res);
         }
-        final int t = 100;
-        /*
-         * Complete this function.
-         */
-
         return res;
     }
 
@@ -73,23 +68,22 @@ public class FrontCompression {
             return "";
         }
         String[] arr = corpus.split("\n");
-        String[] inter = new String[arr.length];
-        String res;
-        inter[0] = arr[0].split(" ")[1];
-        int pref;
+        //String[] inter = new String[arr.length];
+        String res = "";
+        res += arr[0].split(" ")[1] + "\n";
+        int prefN;
         String suff;
+        String pref;
+        int ptr = 0;
         for (int i = 1; i < arr.length; ++i) {
-            pref = Integer.parseInt(arr[i].split(" ")[0]);
+            //System.out.println(res);
+            prefN = Integer.parseInt(arr[i].split(" ")[0]);
+            pref = res.substring(ptr, ptr + prefN);
+            ptr = res.length();
             suff = arr[i].split(" ")[1];
-            inter[i] = inter[i - 1].substring(0, pref) + suff;
+            res += pref + suff + "\n";
         }
-        res = String.join("\n", inter);
-        final int t = 100;
-        /*
-         * Complete this function.
-         */
-
-        return res + "\n";
+        return res;
     }
 
     /**
